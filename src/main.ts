@@ -52,6 +52,10 @@ import {
 import { collision$ } from "./observable";
 import birbUrl from "../public/birb.png";
 import mapCsvUrl from "../public/map.csv?url";
+const ASSETS = {
+  birb: "/assets/birb.png",
+  map:  "/assets/map.csv",
+};
 /** Constants */
 const tapes$ = new BehaviorSubject<ReadonlyArray<GhostTape>>([]);
 
@@ -113,7 +117,7 @@ const render = (): ((s: State) => void) => {
     );
     // Add birb to the main grid canvas
     const birdImg = createSvgElement(svg.namespaceURI, "image", {
-        href: "/assets/birb.png",
+        href: ASSETS.birb,
         x: `${Viewport.CANVAS_WIDTH * 0.3 - Birb.WIDTH / 2}`,
         y: `${Viewport.CANVAS_HEIGHT / 2 - Birb.HEIGHT / 2}`,
         width: `${Birb.WIDTH}`,
@@ -344,7 +348,7 @@ export const state$ = (csvContents: string): Observable<State> => {
 if (typeof window !== "undefined") {
     const { protocol, hostname, port } = new URL(import.meta.url);
     const baseUrl = `${protocol}//${hostname}${port ? `:${port}` : ""}`;
-    const csvUrl = `${baseUrl}/assets/map.csv`;
+    const csvUrl = ASSETS.map;
 
     // Get the file from URL
     const csv$ = fromFetch(csvUrl).pipe(
