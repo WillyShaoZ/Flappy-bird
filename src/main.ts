@@ -50,11 +50,9 @@ import {
     createSvgElement,
 } from "./util";
 import { collision$ } from "./observable";
-import birbUrl from "../public/birb.png";
-import mapCsvUrl from "../public/map.csv?url";
 const ASSETS = {
-  birb: "/assets/birb.png",
-  map:  "/assets/map.csv",
+    birb: "/assets/birb.png",
+    map: "/assets/map.csv",
 };
 /** Constants */
 const tapes$ = new BehaviorSubject<ReadonlyArray<GhostTape>>([]);
@@ -117,12 +115,17 @@ const render = (): ((s: State) => void) => {
     );
     // Add birb to the main grid canvas
     const birdImg = createSvgElement(svg.namespaceURI, "image", {
-        href: ASSETS.birb,
         x: `${Viewport.CANVAS_WIDTH * 0.3 - Birb.WIDTH / 2}`,
         y: `${Viewport.CANVAS_HEIGHT / 2 - Birb.HEIGHT / 2}`,
         width: `${Birb.WIDTH}`,
         height: `${Birb.HEIGHT}`,
     });
+    (birdImg as SVGImageElement).setAttributeNS(
+        "http://www.w3.org/1999/xlink",
+        "href",
+        ASSETS.birb,
+    );
+    svg.appendChild(birdImg);
     svg.appendChild(birdImg);
 
     const ghostLayer = createSvgElement(svg.namespaceURI, "g", {});
@@ -172,14 +175,18 @@ const render = (): ((s: State) => void) => {
 
         (s.ghosts ?? []).forEach(g => {
             const img = createSvgElement(svg.namespaceURI, "image", {
-                href: "/assets/birb.png",
                 x: `${g.x - Birb.WIDTH / 2}`,
                 y: `${g.y - Birb.HEIGHT / 2}`,
                 width: `${Birb.WIDTH}`,
                 height: `${Birb.HEIGHT}`,
                 opacity: "0.3",
-                visibility: g.visible ? "visible" : "hidden", //only be visible when it is visible
-            }); //create ghost bird html element
+                visibility: g.visible ? "visible" : "hidden",
+            });
+            (img as SVGImageElement).setAttributeNS(
+                "http://www.w3.org/1999/xlink",
+                "href",
+                ASSETS.birb,
+            );
             ghostLayer.appendChild(img);
         }); //emit each ghost based on the
 
