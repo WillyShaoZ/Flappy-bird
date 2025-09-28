@@ -111,7 +111,7 @@ const render = (): ((s: State) => void) => {
     );
     // Add birb to the main grid canvas
     const birdImg = createSvgElement(svg.namespaceURI, "image", {
-        href: "assets/birb.png",
+        href: "/assets/birb.png",
         x: `${Viewport.CANVAS_WIDTH * 0.3 - Birb.WIDTH / 2}`,
         y: `${Viewport.CANVAS_HEIGHT / 2 - Birb.HEIGHT / 2}`,
         width: `${Birb.WIDTH}`,
@@ -166,7 +166,7 @@ const render = (): ((s: State) => void) => {
 
         (s.ghosts ?? []).forEach(g => {
             const img = createSvgElement(svg.namespaceURI, "image", {
-                href: "assets/birb.png",
+                href: "/assets/birb.png",
                 x: `${g.x - Birb.WIDTH / 2}`,
                 y: `${g.y - Birb.HEIGHT / 2}`,
                 width: `${Birb.WIDTH}`,
