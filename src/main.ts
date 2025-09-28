@@ -51,8 +51,8 @@ import {
 } from "./util";
 import { collision$ } from "./observable";
 const ASSETS = {
-    birb: "/assets/birb.png",
-    map: "/assets/map.csv",
+    birb: "assets/birb.png",
+    map: "assets/map.csv",
 };
 /** Constants */
 const tapes$ = new BehaviorSubject<ReadonlyArray<GhostTape>>([]);
@@ -125,7 +125,6 @@ const render = (): ((s: State) => void) => {
         "href",
         ASSETS.birb,
     );
-    svg.appendChild(birdImg);
     svg.appendChild(birdImg);
 
     const ghostLayer = createSvgElement(svg.namespaceURI, "g", {});
